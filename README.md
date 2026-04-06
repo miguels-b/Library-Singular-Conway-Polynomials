@@ -1,28 +1,28 @@
 # Conway Polynomials: High-Performance Implementation in Singular
 
-[cite_start]This repository contains `conway.lib`, a specialized library for the **Singular** computer algebra system[cite: 5, 12, 684]. [cite_start]Developed as part of my Bachelor's Thesis in Mathematics at the **University of Valladolid**, this project provides a robust framework for calculating Conway polynomials across various finite field characteristics[cite: 2, 3, 4, 1195].
+This repository contains `conway.lib`, a specialized library for the **Singular** computer algebra system[cite: 5, 12, 684]. Developed as part of my Bachelor's Thesis in Mathematics at the **University of Valladolid**, this project provides a robust framework for calculating Conway polynomials across various finite field characteristics.
 
 ## Project Overview
-[cite_start]Conway polynomials $C_{p,n}$ provide a canonical choice of irreducible polynomials to represent each finite field $\mathbb{F}_{p^{n}}$, guaranteeing seamless compatibility between field extensions[cite: 10, 18, 42, 473]. [cite_start]This standardization is critical for interoperability between major computer algebra systems such as GAP, Magma, and Singular[cite: 43, 300, 674].
+Conway polynomials $C_{p,n}$ provide a canonical choice of irreducible polynomials to represent each finite field $\mathbb{F}_{p^{n}}$, guaranteeing seamless compatibility between field extensions. This standardization is critical for interoperability between major computer algebra systems such as GAP, Magma, and Singular.
 
-[cite_start]Computing these polynomials is a high-cost computational problem[cite: 11, 19, 44]. [cite_start]This implementation leverages the **Heath-Loehr algorithm (2004)** and introduces original optimizations to extend calculations to degrees previously considered unreachable on standard hardware[cite: 12, 20, 21, 1017].
+Computing these polynomials is a high-cost computational problem[cite: 11, 19, 44]. This implementation leverages the **Heath-Loehr algorithm (2004)** and introduces original optimizations to extend calculations to degrees previously considered unreachable on standard hardware.
 
 ## Key Technical Achievements
-* [cite_start]**Discovery of New Polynomials**: Successfully calculated **eight previously unrecorded Conway polynomials** for Mersenne exponents: 521, 607, 1279, 2203, 2281, 3217, 4253, and 4423[cite: 15, 23, 56, 929, 1034].
+* **Discovery of New Polynomials**: Successfully calculated **eight previously unrecorded Conway polynomials** for Mersenne exponents: 521, 607, 1279, 2203, 2281, 3217, 4253, and 4423.
 * **Advanced Algorithmic Implementation**:
-    * [cite_start]**Ben-Or Irreducibility Test**: Integrated a highly efficient test that avoids full factorization, enabling the verification of high-degree candidates in $O(n^3)$ time[cite: 316, 327, 754, 1021].
-    * [cite_start]**Lexicographical Pruning**: Implemented "Parker order" pruning to abort sub-optimal candidate calculations immediately, significantly reducing total execution time[cite: 706, 867, 1019].
-    * [cite_start]**Mersenne Prime Optimization**: Developed a specialized path for Mersenne exponents that bypasses expensive primitivity tests, allowing calculations up to degree 4423[cite: 664, 667, 928, 1018].
-    * [cite_start]**Hybrid Computation Model**: The library automatically switches between the Heath-Loehr algorithm for composite degrees and optimized exhaustive searches for prime degrees based on the compatibility parameter $g$[cite: 656, 657, 689, 1018].
-* [cite_start]**System Integration**: Utilizes Singular’s efficient binary representation and modular arithmetic, coupled with external Linux-based factorization tools for maximum performance[cite: 737, 773, 840, 890].
+    * **Ben-Or Irreducibility Test**: Integrated a highly efficient test that avoids full factorization, enabling the verification of high-degree candidates in $O(n^3)$ time.
+    * **Lexicographical Pruning**: Implemented "Parker order" pruning to abort sub-optimal candidate calculations immediately, significantly reducing total execution time.
+    * **Mersenne Prime Optimization**: Developed a specialized path for Mersenne exponents that bypasses expensive primitivity tests, allowing calculations up to degree 4423.
+    * **Hybrid Computation Model**: The library automatically switches between the Heath-Loehr algorithm for composite degrees and optimized exhaustive searches for prime degrees based on the compatibility parameter $g$.
+* **System Integration**: Utilizes Singular’s efficient binary representation and modular arithmetic, coupled with external Linux-based factorization tools for maximum performance.
 
 ## Research & Impact
-[cite_start]By reducing the search space by factors exceeding **$10^{13}$** for certain composite degrees (e.g., $n=60$), this library demonstrates how mathematical theory can be applied to solve "NP-hard" style bottlenecks in computational algebra[cite: 918, 919, 1045].
+By reducing the search space by factors exceeding **$10^{13}$** for certain composite degrees (e.g., $n=60$), this library demonstrates how mathematical theory can be applied to solve "NP-hard" style bottlenecks in computational algebra[cite: 918, 919, 1045].
 
 ---
 
 ## 1. Results: New Mersenne Conway Polynomials ($p=2$)
-[cite_start]The following table presents the previously unrecorded polynomials discovered during this research, corresponding to Mersenne exponents $n$ where $2^n-1$ is prime[cite: 664, 933, 1034].
+The following table presents the previously unrecorded polynomials discovered during this research, corresponding to Mersenne exponents $n$ where $2^n-1$ is prime[cite: 664, 933, 1034].
 
 | Degree ($n$) | Approx. Primitive Elements | Conway Polynomial $C_{2,n}(x)$ |
 | :--- | :--- | :--- |
@@ -38,7 +38,7 @@
 ---
 
 ## 2. Higher Characteristics ($p > 2$)
-[cite_start]Conway polynomials calculated for various prime characteristics $p$ and degrees $n$[cite: 22, 56, 941].
+Conway polynomials calculated for various prime characteristics $p$ and degrees $n$[cite: 22, 56, 941].
 
 | $p$ | $n=11$ | $n=13$ | $n=17$ | $n=19$ | $n=23$ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
