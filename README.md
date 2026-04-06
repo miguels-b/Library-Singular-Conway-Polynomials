@@ -8,7 +8,7 @@ Conway polynomials $C_{p,n}$ provide a canonical choice of irreducible polynomia
 Computing these polynomials is a high-cost computational problem. This implementation leverages the **Heath-Loehr algorithm (2004)** and introduces original optimizations to extend calculations to degrees previously considered unreachable on standard hardware.
 
 ## Key Technical Achievements
-* **Discovery of New Polynomials**: Successfully calculated **eight previously unrecorded Conway polynomials** for Mersenne exponents: 521, 607, 1279, 2203, 2281, 3217, 4253, and 4423. Also we calculated **one hundred and three more previously unrecorded Conway polynomials** with p>200 and n=11,13,17,19,23.
+* **Discovery of New Polynomials**: Successfully calculated **eight previously unrecorded Conway polynomials** for Mersenne exponents: 521, 607, 1279, 2203, 2281, 3217, 4253, and 4423. Also we calculated **one hundred and four more previously unrecorded Conway polynomials** with p>200 and n=11,13,17,19,23.
 * **Advanced Algorithmic Implementation**:
     * **Ben-Or Irreducibility Test**: Integrated a highly efficient test that avoids full factorization, enabling the verification of high-degree candidates in $O(n^3)$ time.
     * **Lexicographical Pruning**: Implemented "Parker order" pruning to abort sub-optimal candidate calculations immediately, significantly reducing total execution time.
@@ -23,7 +23,7 @@ By reducing the search space by factors exceeding **$10^{13}$** for certain comp
 
 # Conway Polynomials Database
 
-This repository contains a collection of 111 unregistered **Conway Polynomials** $C_{p,n}$, which are used to define standard extensions of finite fields $GF(p^n)$. These polynomials are essential for ensuring compatibility between different computer algebra systems.
+This repository contains a collection of 112 unregistered **Conway Polynomials** $C_{p,n}$, which are used to define standard extensions of finite fields $GF(p^n)$. These polynomials are essential for ensuring compatibility between different computer algebra systems.
 
 ---
 
@@ -65,7 +65,7 @@ Conway polynomials for various prime characteristics $p$ and degrees $n$.
 | **349** | $x^{11} + 42x - 2$ | $x^{13} + 13x - 2$ | $x^{17} + 8x - 2$ | $x^{19} + 7x - 2$ | $x^{23} + 16x - 2$ |
 | **353** | $x^{11} + 13x - 3$ | $x^{13} + 22x - 3$ | $x^{17} + 16x - 3$ | $x^{19} + 5x - 3$ | - |
 | **359** | $x^{11} + 27x - 7$ | $x^{13} + 4x - 7$ | $x^{17} + 22x - 7$ | - | $x^{23} + 35x - 7$ |
-| **367** | $x^{11} + 27x - 6$ | $x^{13} + 6x - 6$ | $x^{17} + 11x - 6$ | - | $x^{23} + 26x - 6$ |
+| **367** | $x^{11} + 27x - 6$ | $x^{13} + 6x - 6$ | $x^{17} + 11x - 6$ | $x^{19} + 43x - 6$ | $x^{23} + 26x - 6$ |
 | **373** | $x^{11} + 4x - 2$ | $x^{13} + 15x - 2$ | $x^{17} + 17x - 2$ | $x^{19} + 18x - 2$ | $x^{23} + 13x - 2$ |
 | **379** | $x^{11} + 6x - 2$ | $x^{13} + 8x - 2$ | $x^{17} + 8x - 2$ | $x^{19} + 26x - 2$ | $x^{23} + 7x - 2$ |
 | **383** | $x^{11} + 17x - 5$ | $x^{13} + x - 5$ | $x^{17} + 13x - 5$ | $x^{19} + 25x - 5$ | $x^{23} + 7x - 5$ |
