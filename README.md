@@ -5,10 +5,10 @@ This repository contains `conway.lib`, a specialized library for the **Singular*
 ## Project Overview
 Conway polynomials $C_{p,n}$ provide a canonical choice of irreducible polynomials to represent each finite field $\mathbb{F}_{p^{n}}$, guaranteeing seamless compatibility between field extensions. This standardization is critical for interoperability between major computer algebra systems such as GAP, Magma, and Singular.
 
-Computing these polynomials is a high-cost computational problem[cite: 11, 19, 44]. This implementation leverages the **Heath-Loehr algorithm (2004)** and introduces original optimizations to extend calculations to degrees previously considered unreachable on standard hardware.
+Computing these polynomials is a high-cost computational problem. This implementation leverages the **Heath-Loehr algorithm (2004)** and introduces original optimizations to extend calculations to degrees previously considered unreachable on standard hardware.
 
 ## Key Technical Achievements
-* **Discovery of New Polynomials**: Successfully calculated **eight previously unrecorded Conway polynomials** for Mersenne exponents: 521, 607, 1279, 2203, 2281, 3217, 4253, and 4423.
+* **Discovery of New Polynomials**: Successfully calculated **eight previously unrecorded Conway polynomials** for Mersenne exponents: 521, 607, 1279, 2203, 2281, 3217, 4253, and 4423. Also we calculated **one hundred more previously unrecorded Conway polynomials** with p>200 and n=11,13,17,19,23.
 * **Advanced Algorithmic Implementation**:
     * **Ben-Or Irreducibility Test**: Integrated a highly efficient test that avoids full factorization, enabling the verification of high-degree candidates in $O(n^3)$ time.
     * **Lexicographical Pruning**: Implemented "Parker order" pruning to abort sub-optimal candidate calculations immediately, significantly reducing total execution time.
@@ -17,12 +17,12 @@ Computing these polynomials is a high-cost computational problem[cite: 11, 19, 4
 * **System Integration**: Utilizes Singular’s efficient binary representation and modular arithmetic, coupled with external Linux-based factorization tools for maximum performance.
 
 ## Research & Impact
-By reducing the search space by factors exceeding **$10^{13}$** for certain composite degrees (e.g., $n=60$), this library demonstrates how mathematical theory can be applied to solve "NP-hard" style bottlenecks in computational algebra[cite: 918, 919, 1045].
+By reducing the search space by factors exceeding **$10^{13}$** for certain composite degrees (e.g., $n=60$), this library demonstrates how mathematical theory can be applied to solve "NP-hard" style bottlenecks in computational algebra.
 
 ---
 
 ## 1. Results: New Mersenne Conway Polynomials ($p=2$)
-The following table presents the previously unrecorded polynomials discovered during this research, corresponding to Mersenne exponents $n$ where $2^n-1$ is prime[cite: 664, 933, 1034].
+The following table presents the previously unrecorded polynomials discovered during this research, corresponding to Mersenne exponents $n$ where $2^n-1$ is prime.
 
 | Degree ($n$) | Approx. Primitive Elements | Conway Polynomial $C_{2,n}(x)$ |
 | :--- | :--- | :--- |
