@@ -1,12 +1,40 @@
 # Conway Polynomials: High-Performance Implementation in Singular
-
+ 
 This repository contains `conway.lib`, a specialized library for the **Singular** computer algebra system. Developed as part of my Bachelor's Thesis in Mathematics at the **University of Valladolid**, this project provides a robust framework for calculating Conway polynomials across various finite field characteristics.
-
-## Project Overview
-Conway polynomials $C_{p,n}$ provide a canonical choice of irreducible polynomials to represent each finite field $\mathbb{F}_{p^{n}}$, guaranteeing seamless compatibility between field extensions. This standardization is critical for interoperability between major computer algebra systems such as GAP, Magma, and Singular.
-
-Computing these polynomials is a high-cost computational problem. This implementation leverages the **Heath-Loehr algorithm (2004)** and introduces original optimizations to extend calculations to degrees previously considered unreachable on standard hardware.
-
+ 
+---
+ 
+## What Are Conway Polynomials?
+ 
+Every finite field $\mathbb{F}_{p^n}$ with $p^n$ elements is constructed as a quotient $\mathbb{F}_p[x]/(f(x))$ by choosing an irreducible polynomial $f(x)$ of degree $n$ over $\mathbb{F}_p$. Different choices of $f$ yield different representations: the same elements get different coordinates and different multiplication tables.
+ 
+When working with a single finite field, this ambiguity is harmless. The problem arises when **multiple finite fields must coexist**, related by subfield inclusions. If $m \mid n$, then $\mathbb{F}_{p^m}$ embeds into $\mathbb{F}_{p^n}$, but for this inclusion to be computationally manageable, the irreducible polynomials chosen for both fields must be **compatible**: a root of the larger field's polynomial, raised to the appropriate power, must be a root of the smaller field's polynomial.
+ 
+### Definition
+ 
+The **Conway polynomial** $C_{p,n}(x)$ is the unique monic irreducible polynomial of degree $n$ over $\mathbb{F}_p$ satisfying three conditions:
+ 
+1. **Primitivity**: Its roots generate the full multiplicative group $\mathbb{F}_{p^n}^*$.
+2. **Norm-compatibility**: For every proper divisor $m \mid n$, if $\alpha$ is a root of $C_{p,n}(x)$, then
+$$\alpha^{(p^n - 1)/(p^m - 1)} \text{ is a root of } C_{p,m}(x).$$
+3. **Lexicographic minimality**: Among all polynomials satisfying (1) and (2), $C_{p,n}$ is the smallest in the **Parker lexicographic order** — a specific ordering introduced by R. Parker that alternates the comparison direction depending on the parity of the coefficient's position.
+ 
+Conditions (1) and (2) ensure algebraic coherence across the tower of finite field extensions. Condition (3) is purely conventional: it forces a **unique** choice so that different computer algebra systems (GAP, Magma, Singular, SageMath) all use the same polynomial.
+ 
+### Why Do They Matter?
+ 
+- **Interoperability**: They provide a universal standard for representing finite fields, so that computations performed in GAP can be directly imported into Magma or Singular without converting between representations.
+- **Subfield embeddings**: The compatibility condition means that the inclusion $\mathbb{F}_{p^m} \hookrightarrow \mathbb{F}_{p^n}$ is given directly by the norm map — no need to solve expensive systems of equations.
+- **Applications**: Conway polynomials are used in algebraic coding theory, Brauer character computations in representation theory, cryptographic implementations over binary fields, and any setting where consistent finite field arithmetic across multiple extensions is required.
+ 
+### The Computational Challenge
+ 
+Computing Conway polynomials is expensive. A brute-force search over all monic polynomials of degree $n$ has cost exponential in $n$. The **Heath-Loehr algorithm (2004)** reduces the search space from $p^n$ candidates to exactly $g = \gcd\{(p^n-1)/(p^{d_i}-1)\}$ candidates (where $d_i$ are the maximal proper divisors of $n$), by exploiting the algebraic structure of cyclic groups. For composite degrees with multiple distinct prime factors, $g$ is dramatically smaller — for instance, $g = 80{,}581$ when $n = 60$ versus $2^{60} \approx 10^{18}$ total polynomials, a reduction factor exceeding $10^{13}$.
+ 
+However, when $n$ is prime, the Heath-Loehr reduction offers no advantage. This is where our implementation introduces original optimizations — most notably for **Mersenne prime exponents**, where $2^n - 1$ is prime and every irreducible polynomial of degree $n$ is automatically primitive, reducing the problem to finding the first irreducible in Parker order using the Ben-Or test.
+ 
+> **For a complete and rigorous treatment** — including full proofs of existence and uniqueness, the theory of compatible generator systems in cyclic groups, detailed algorithm descriptions, and performance analysis — see the thesis document **`TFG_Matematicas.pdf`** included in this repository (written in Spanish).
+ 
 ## Key Technical Achievements
 * **Discovery of New Polynomials**: Successfully calculated **eight previously unrecorded Conway polynomials** for Mersenne exponents: 521, 607, 1279, 2203, 2281, 3217, 4253, and 4423. Also we calculated **one hundred and four more previously unrecorded Conway polynomials** with p>200 and n=11,13,17,19,23.
 * **Advanced Algorithmic Implementation**:
@@ -17,7 +45,11 @@ Computing these polynomials is a high-cost computational problem. This implement
 * **System Integration**: Utilizes Singular’s efficient binary representation and modular arithmetic, coupled with external Linux-based factorization tools for maximum performance.
 
 ## Research & Impact
-By reducing the search space by factors exceeding **$10^{13}$** for certain composite degrees (e.g., $n=60$), this library demonstrates how mathematical theory can be applied to solve "NP-hard" style bottlenecks in computational algebra.
+ 
+By reducing the search space by factors exceeding **$10^{13}$** for certain composite degrees (e.g., $n=60$), this library demonstrates how mathematical theory can be applied to solve computationally hard bottlenecks in computational algebra.
+ 
+A particularly striking result: $C_{2,4423}$ (degree 4423) was computed in approximately 20 hours on a personal computer, while $C_{2,128}$ (degree 128) remains incomputable with current methods — because the difficulty depends not on the degree $n$, but on the arithmetic structure of $n$ and the factorizability of $p^n - 1$.
+ 
 
 ---
 
